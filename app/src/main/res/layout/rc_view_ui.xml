@@ -1,0 +1,72 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/load_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/not_found"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="5dp"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="18dp"
+            android:text="Title"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:layout_toEndOf="@id/load_image"/>
+
+        <TextView
+            android:id="@+id/author_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Author"
+            android:layout_marginTop="15dp"
+            android:layout_marginHorizontal="16dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_below="@id/title_tv"
+            android:layout_toEndOf="@id/load_image"/>
+
+        <TextView
+            android:id="@+id/section_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:layout_below="@id/author_tv"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_toEndOf="@id/load_image"/>
+
+        <ImageView
+            android:id="@+id/options_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/section_name"
+            android:layout_marginTop="-18dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="18dp"
+            android:src="@drawable/baseline_more_horiz_24"
+            tools:ignore="ContentDescription"/>
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
