@@ -83,6 +83,7 @@ dependencies {
     //  Navigation
     implementation (libs.androidx.navigation.fragment.ktx)
     implementation (libs.androidx.navigation.ui.ktx)
+    implementation (libs.androidx.fragment.ktx)
 
     //  LottieFiles
     implementation (libs.lottie)
@@ -93,5 +94,6 @@ dependencies {
     // Scroll to Refresh Layout
     implementation (libs.androidx.swiperefreshlayout)
 
-    implementation (libs.androidx.fragment.ktx)
+    // Splash Screen
+    implementation (libs.androidx.core.splashscreen)
 }

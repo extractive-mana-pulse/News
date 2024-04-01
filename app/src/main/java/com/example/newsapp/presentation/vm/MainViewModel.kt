@@ -7,6 +7,9 @@ import com.example.newsapp.models.NewsResponse
 import com.example.newsapp.domain.repository.Repository
 import com.example.newsapp.presentation.sealed.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
@@ -20,7 +23,14 @@ class MainViewModel @Inject constructor(
     val searchNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
     private val pageNumber = 1
 
+    private val _isLoading = MutableStateFlow(true)
+    val isLoading = _isLoading.asStateFlow()
+
     init {
+        viewModelScope.launch {
+            delay(3000)
+            _isLoading.value = false
+        }
         getBreakingNews("us")
     }
 
