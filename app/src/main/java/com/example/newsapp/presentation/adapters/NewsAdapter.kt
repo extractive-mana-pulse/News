@@ -1,15 +1,17 @@
 package com.example.newsapp.presentation.adapters
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.newsapp.R
-import com.example.newsapp.data.local.Articles
+import com.example.newsapp.models.Articles
 import com.example.newsapp.databinding.RcViewUiBinding
 
 class NewsAdapter: RecyclerView.Adapter<NewsAdapter.MyViewHolder>(){
@@ -47,9 +49,29 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.MyViewHolder>(){
                 authorTv.text = author
                 sectionName.text = description
 
+                holder.itemView.setOnClickListener {
+
+                    val bundle = Bundle().apply {
+                        putString("title", title)
+                        putString("author", author)
+                        putString("url", url)
+                        putString("image", urlToImage)
+                        putString("post_description", description)
+                    }
+
+                    val navController = Navigation.findNavController(holder.itemView)
+                    navController.navigate(R.id.articleFragment, bundle)
+                }
+
             }
         }
     }
+
+//    private var onItemSelectedListener: ((Articles)-> Unit)? = null
+//
+//    fun setOnItemClickListener(listener: (Articles) -> Unit) {
+//        onItemSelectedListener = listener
+//    }
 
     override fun getItemCount(): Int {
         return differ.currentList.size

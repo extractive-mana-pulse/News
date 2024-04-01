@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -22,10 +25,29 @@
         <action
             android:id="@+id/action_searchFragment_to_bookmarksFragment"
             app:destination="@id/bookmarksFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
     </fragment>
     <fragment
         android:id="@+id/bookmarksFragment"
         android:name="com.example.newsapp.presentation.fragments.BookmarksFragment"
         android:label="fragment_bookmarks"
-        tools:layout="@layout/fragment_bookmarks" />
+        tools:layout="@layout/fragment_bookmarks" >
+        <action
+            android:id="@+id/action_bookmarksFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/articleFragment"
+        android:name="com.example.newsapp.presentation.fragments.ArticleFragment"
+        android:label="fragment_article"
+        tools:layout="@layout/fragment_article" >
+        <action
+            android:id="@+id/action_articleFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <argument
+            android:name="article"
+            app:argType="com.example.newsapp.models.Articles" />
+    </fragment>
 </navigation>

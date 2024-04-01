@@ -3,7 +3,7 @@ package com.example.newsapp.presentation.vm
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.newsapp.data.local.NewsResponse
+import com.example.newsapp.models.NewsResponse
 import com.example.newsapp.domain.repository.Repository
 import com.example.newsapp.presentation.sealed.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel

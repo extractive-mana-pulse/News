@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentSearchBinding
@@ -88,6 +89,13 @@ class SearchFragment : Fragment() {
                 }
             }
         }
+
+//        newsAdapter.setOnItemClickListener {
+//            val bundle = Bundle().apply {
+//                putSerializable("article", it)
+//            }
+//            findNavController().navigate(R.id.action_searchFragment_to_articleFragment, bundle)
+//        }
     }
 
     private fun showProgressBar() {
