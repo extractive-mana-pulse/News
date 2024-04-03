@@ -43,6 +43,16 @@ class HomeFragment : Fragment() {
                 refreshLayout.isRefreshing = false
             }
 
+//            newsAdapter.setOnItemClickListener {
+//                val bundle = Bundle().apply {
+//                    putSerializable("article", it)
+//                }
+//                findNavController().navigate(
+//                    R.id.action_homeFragment_to_articleFragment,
+//                    bundle
+//                )
+//            }
+
             viewModel.tryResponse.observe(viewLifecycleOwner) { response ->
                 when(response) {
 

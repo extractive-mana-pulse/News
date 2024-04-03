@@ -1,8 +1,13 @@
-package com.example.newsapp.di
+package com.example.newsapp.data.module
 
+import android.app.Application
+import androidx.room.Room
+import com.example.newsapp.data.db.ArticleDatabase
 import com.example.newsapp.data.remote.Api
-import com.example.newsapp.domain.repository.Repository
-import com.example.newsapp.domain.repositoryImpl.RepositoryImpl
+import com.example.newsapp.data.repository.DbRepository
+import com.example.newsapp.data.repository.Repository
+import com.example.newsapp.domain.repositoryImpl.DbRepositoryImpl
+import com.example.newsapp.domain.repositoryImpl.NetworkRepositoryImpl
 import com.example.newsapp.presentation.util.Constants.Companion.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -25,6 +30,17 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideDatabase(app : Application) : ArticleDatabase {
+        return Room.databaseBuilder(
+            app,
+            ArticleDatabase::class.java,
+            "article.db"
+        ).build()
+    }
+
+
+    @Provides
+    @Singleton
     fun provideApi(retrofit: Retrofit): Api {
         return retrofit.create(Api::class.java)
     }
@@ -32,6 +48,12 @@ object AppModule {
     @Provides
     @Singleton
     fun provideRepository(api: Api) : Repository {
-        return RepositoryImpl(api)
+        return NetworkRepositoryImpl(api)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDbRepository(db: ArticleDatabase): DbRepository {
+        return DbRepositoryImpl(db)
     }
 }

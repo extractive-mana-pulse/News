@@ -1,24 +1,33 @@
 package com.example.newsapp.presentation.fragments
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentArticleBinding
+import com.example.newsapp.domain.models.Articles
+import com.example.newsapp.presentation.vm.DatabaseViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileInputStream
 
 @AndroidEntryPoint
 class ArticleFragment : Fragment() {
 
-    private val binding by lazy { FragmentArticleBinding.inflate(layoutInflater)}
+    private val databaseViewModel : DatabaseViewModel by viewModels()
+    private val binding by lazy { FragmentArticleBinding.inflate(layoutInflater) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return binding.root
@@ -32,7 +41,6 @@ class ArticleFragment : Fragment() {
         val imageUrl = arguments?.getString("image")
         val description = arguments?.getString("post_description")
 
-
         binding.apply {
 
             articleTitle.text = title
@@ -41,8 +49,29 @@ class ArticleFragment : Fragment() {
             Glide.with(requireContext()).load(imageUrl).into(imageArticle)
 
             articleBackBtn.setOnClickListener { findNavController().popBackStack() }
+
             shareIcon.setOnClickListener { share() }
+
             readMoreIcon.setOnClickListener { web() }
+
+            saveIcon.setOnClickListener {
+                try {
+                    databaseViewModel.saveArticle(
+                        Articles(
+                            null,
+                            title,
+                            author,
+                            description,
+                            webUrl.toString(),
+                            imageUrl
+                    ))
+                    Snackbar.make(view, "Saved", Snackbar.LENGTH_SHORT).show()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    Snackbar.make(view, "Error occur! ${e.message}", Snackbar.LENGTH_SHORT).show()
+                }
+            }
+
             imageArticle.setOnClickListener {
 
                 val fullScreenImageFragment = FullScreenImageFragment()
@@ -61,13 +90,9 @@ class ArticleFragment : Fragment() {
     }
 
     private fun share() {
-
-        val intent = Intent(Intent.ACTION_SEND)
         val url = arguments?.getString("url")
-        intent.putExtra(Intent.EXTRA_TEXT, url)
-        intent.type = "text/plain"
-
-        requireContext().startActivity(Intent.createChooser(intent,"Choose app:"))
+        Intent().setAction(Intent.ACTION_SEND).putExtra(Intent.EXTRA_TEXT, url).type = "text/plain"
+        requireContext().startActivity(Intent.createChooser(Intent(),"Choose app:"))
     }
 
     private fun web() {

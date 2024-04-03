@@ -1,6 +1,6 @@
-package com.example.newsapp.domain.repository
+package com.example.newsapp.data.repository
 
-import com.example.newsapp.models.NewsResponse
+import com.example.newsapp.domain.models.NewsResponse
 import retrofit2.Response
 
 interface Repository {

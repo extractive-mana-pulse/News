@@ -1,11 +1,11 @@
 package com.example.newsapp.domain.repositoryImpl
 
-import com.example.newsapp.models.NewsResponse
 import com.example.newsapp.data.remote.Api
-import com.example.newsapp.domain.repository.Repository
+import com.example.newsapp.data.repository.Repository
+import com.example.newsapp.domain.models.NewsResponse
 import retrofit2.Response
 
-class RepositoryImpl(
+class NetworkRepositoryImpl(
     private val api : Api
 ) : Repository {
 

@@ -1,4 +1,4 @@
-package com.example.newsapp.models
+package com.example.newsapp.domain.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -16,6 +16,6 @@ data class Articles (
   @SerializedName("url"         ) var url         : String? = null,
   @SerializedName("urlToImage"  ) var urlToImage  : String? = null,
   @SerializedName("publishedAt" ) var publishedAt : String? = null,
-  @SerializedName("content"     ) var content     : String? = null
+  @SerializedName("content"     ) var content     : String? = null,
 
 ) : Serializable

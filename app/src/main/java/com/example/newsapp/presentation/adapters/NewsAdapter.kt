@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.newsapp.R
-import com.example.newsapp.models.Articles
+import com.example.newsapp.domain.models.Articles
 import com.example.newsapp.databinding.RcViewUiBinding
 
 class NewsAdapter: RecyclerView.Adapter<NewsAdapter.MyViewHolder>(){
@@ -37,6 +37,8 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.MyViewHolder>(){
         return MyViewHolder(view)
     }
 
+    private var onItemSelectedListener: ((Articles)-> Unit)? = null
+
     @SuppressLint("DiscouragedPrivateApi")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val data = differ.currentList[position]
@@ -51,6 +53,7 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.MyViewHolder>(){
                     .centerCrop()
                     .into(loadImage)
 
+                titleTv.text = title
                 authorTv.text = author
 
                 val updatedList = differ.currentList.toMutableList()
@@ -59,8 +62,6 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.MyViewHolder>(){
                 if (itemToRemove != null) {
                     updatedList.remove(itemToRemove)
                     differ.submitList(updatedList)
-                } else {
-                    titleTv.text = title
                 }
 
                 if (description.isNullOrBlank()) {
@@ -82,11 +83,13 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.MyViewHolder>(){
                     val navController = Navigation.findNavController(holder.itemView)
                     navController.navigate(R.id.articleFragment, bundle)
                 }
+
+//                holder.itemView.setOnClickListener {
+//                    onItemSelectedListener?.let { it(data) }
+//                }
             }
         }
     }
-
-    private var onItemSelectedListener: ((Articles)-> Unit)? = null
 
     fun setOnItemClickListener(listener: (Articles) -> Unit) {
         onItemSelectedListener = listener
