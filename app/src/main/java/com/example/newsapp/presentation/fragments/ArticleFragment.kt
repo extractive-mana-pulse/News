@@ -1,11 +1,13 @@
 package com.example.newsapp.presentation.fragments
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.newsapp.R
@@ -40,6 +42,21 @@ class ArticleFragment : Fragment() {
 
             articleBackBtn.setOnClickListener { findNavController().popBackStack() }
             shareIcon.setOnClickListener { share() }
+            readMoreIcon.setOnClickListener { web() }
+            imageArticle.setOnClickListener {
+
+                val fullScreenImageFragment = FullScreenImageFragment()
+
+                imageArticle.buildDrawingCache()
+                val originalBitmap = imageArticle.drawingCache
+                val image = originalBitmap.copy(originalBitmap.config, true)
+
+                val extras = Bundle()
+                extras.putParcelable("image", image)
+                fullScreenImageFragment.arguments = extras
+
+                fullScreenImageFragment.show(requireActivity().supportFragmentManager, "FullScreenImageFragment")
+            }
         }
     }
 
@@ -51,6 +68,15 @@ class ArticleFragment : Fragment() {
         intent.type = "text/plain"
 
         requireContext().startActivity(Intent.createChooser(intent,"Choose app:"))
+    }
 
+    private fun web() {
+        val webUrl = arguments?.getString("url")
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(webUrl))
+        if (intent.resolveActivity(requireContext().packageManager) != null) {
+            startActivity(intent)
+        } else {
+            Toast.makeText(requireContext(), "no web browser app is available", Toast.LENGTH_SHORT).show()
+        }
     }
 }

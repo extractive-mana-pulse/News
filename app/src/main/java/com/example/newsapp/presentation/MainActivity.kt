@@ -29,8 +29,12 @@ class MainActivity : AppCompatActivity() {
                 viewModel.isLoading.value
             }
         }
-
         setContentView(binding.root)
-        binding.bottomNavView.setupWithNavController(navController)
+
+        binding.apply {
+
+            bottomNavView.setupWithNavController(navController)
+
+        }
     }
 }

@@ -21,6 +21,7 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.MyViewHolder>(){
     }
 
     private val differCallback = object : DiffUtil.ItemCallback<Articles>(){
+
         override fun areItemsTheSame(oldItem: Articles, newItem: Articles): Boolean {
             return oldItem.url == newItem.url
         }
@@ -44,10 +45,29 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.MyViewHolder>(){
         holder.binding.apply {
             data.apply {
 
-                Glide.with(context).load(urlToImage).into(loadImage)
-                titleTv.text = title
+                Glide.with(context)
+                    .load(urlToImage)
+                    .error(R.drawable.not_found)
+                    .centerCrop()
+                    .into(loadImage)
+
                 authorTv.text = author
-                sectionName.text = description
+
+                val updatedList = differ.currentList.toMutableList()
+                val itemToRemove = updatedList.firstOrNull { it.title == "[Removed]" }
+
+                if (itemToRemove != null) {
+                    updatedList.remove(itemToRemove)
+                    differ.submitList(updatedList)
+                } else {
+                    titleTv.text = title
+                }
+
+                if (description.isNullOrBlank()) {
+                    descriptionTv.visibility = View.GONE
+                } else {
+                    descriptionTv.text = description
+                }
 
                 holder.itemView.setOnClickListener {
 
@@ -62,16 +82,15 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.MyViewHolder>(){
                     val navController = Navigation.findNavController(holder.itemView)
                     navController.navigate(R.id.articleFragment, bundle)
                 }
-
             }
         }
     }
 
-//    private var onItemSelectedListener: ((Articles)-> Unit)? = null
-//
-//    fun setOnItemClickListener(listener: (Articles) -> Unit) {
-//        onItemSelectedListener = listener
-//    }
+    private var onItemSelectedListener: ((Articles)-> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Articles) -> Unit) {
+        onItemSelectedListener = listener
+    }
 
     override fun getItemCount(): Int {
         return differ.currentList.size

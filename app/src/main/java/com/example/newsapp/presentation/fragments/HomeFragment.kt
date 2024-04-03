@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
 
             rcView.adapter = newsAdapter
             rcView.layoutManager = LinearLayoutManager(requireContext())
-            rcView.addItemDecoration(DividerItemDecoration(rcView.context, DividerItemDecoration.VERTICAL))
+//            rcView.addItemDecoration(DividerItemDecoration(rcView.context, DividerItemDecoration.VERTICAL))
 
             refreshLayout.setOnRefreshListener {
                 // TODO when user swipe down update page with new data. new data can be regarding when it's published(fresh one!)
