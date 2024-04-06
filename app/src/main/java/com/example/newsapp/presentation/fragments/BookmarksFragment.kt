@@ -33,8 +33,14 @@ class BookmarksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.bookmarksRcView.adapter = newsAdapter
-        binding.bookmarksRcView.layoutManager = LinearLayoutManager(requireContext())
+        binding.apply {
+            bookmarksSwipeToRefreshLayout.setOnRefreshListener {
+                bookmarksSwipeToRefreshLayout.isRefreshing = false
+            }
+
+            bookmarksRcView.adapter = newsAdapter
+            bookmarksRcView.layoutManager = LinearLayoutManager(requireContext())
+        }
 
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.UP or ItemTouchHelper.DOWN,

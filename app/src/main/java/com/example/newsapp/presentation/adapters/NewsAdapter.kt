@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.newsapp.R
-import com.example.newsapp.domain.models.Articles
 import com.example.newsapp.databinding.RcViewUiBinding
+import com.example.newsapp.domain.models.Articles
 
 class NewsAdapter: RecyclerView.Adapter<NewsAdapter.MyViewHolder>(){
 
@@ -36,8 +36,6 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.MyViewHolder>(){
         val view = LayoutInflater.from(parent.context).inflate(R.layout.rc_view_ui, parent, false)
         return MyViewHolder(view)
     }
-
-    private var onItemSelectedListener: ((Articles)-> Unit)? = null
 
     @SuppressLint("DiscouragedPrivateApi")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -83,17 +81,10 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.MyViewHolder>(){
                     val navController = Navigation.findNavController(holder.itemView)
                     navController.navigate(R.id.articleFragment, bundle)
                 }
-
-//                holder.itemView.setOnClickListener {
-//                    onItemSelectedListener?.let { it(data) }
-//                }
             }
         }
     }
 
-    fun setOnItemClickListener(listener: (Articles) -> Unit) {
-        onItemSelectedListener = listener
-    }
 
     override fun getItemCount(): Int {
         return differ.currentList.size

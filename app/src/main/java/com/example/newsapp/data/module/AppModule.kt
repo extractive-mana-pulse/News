@@ -2,13 +2,13 @@ package com.example.newsapp.data.module
 
 import android.app.Application
 import androidx.room.Room
-import com.example.newsapp.data.db.ArticleDatabase
+import com.example.newsapp.data.local.ArticleDatabase
 import com.example.newsapp.data.remote.Api
 import com.example.newsapp.data.repository.DbRepository
 import com.example.newsapp.data.repository.Repository
 import com.example.newsapp.domain.repositoryImpl.DbRepositoryImpl
 import com.example.newsapp.domain.repositoryImpl.NetworkRepositoryImpl
-import com.example.newsapp.presentation.util.Constants.Companion.BASE_URL
+import com.example.newsapp.data.util.Constants.Companion.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

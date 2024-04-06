@@ -1,7 +1,7 @@
 package com.example.newsapp.domain.repositoryImpl
 
 import androidx.lifecycle.LiveData
-import com.example.newsapp.data.db.ArticleDatabase
+import com.example.newsapp.data.local.ArticleDatabase
 import com.example.newsapp.data.repository.DbRepository
 import com.example.newsapp.domain.models.Articles
 

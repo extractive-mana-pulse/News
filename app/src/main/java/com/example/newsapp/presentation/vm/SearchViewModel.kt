@@ -17,6 +17,8 @@ class SearchViewModel @Inject constructor(
 ) : ViewModel() {
 
     val searchNews : MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
+    var searchPage = 1
+    var searchNewsResponse : NewsResponse? = null
 
     fun searchNews(searchQuery: String) = viewModelScope.launch {
         searchNews.postValue(Resource.Loading())
@@ -25,9 +27,17 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun handleSearchNews(response: Response<NewsResponse>): Resource<NewsResponse> {
-        if(response.isSuccessful){
-            response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+        if (response.isSuccessful) {
+            response.body()?.let {result ->
+                searchPage++
+                if (searchNewsResponse == null) {
+                    searchNewsResponse = result
+                } else {
+                    val oldArticles = searchNewsResponse?.articles
+                    val newArticles = result.articles
+                    oldArticles?.addAll(newArticles)
+                }
+                return Resource.Success(searchNewsResponse ?: result)
             }
         }
         return Resource.Error(response.message())

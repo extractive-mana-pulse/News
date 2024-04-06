@@ -1,4 +1,4 @@
-package com.example.newsapp.data.db
+package com.example.newsapp.data.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

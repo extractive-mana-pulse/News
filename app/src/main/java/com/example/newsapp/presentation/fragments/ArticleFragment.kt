@@ -1,7 +1,7 @@
 package com.example.newsapp.presentation.fragments
 
+import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,18 +10,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.newsapp.databinding.FragmentArticleBinding
 import com.example.newsapp.domain.models.Articles
 import com.example.newsapp.presentation.vm.DatabaseViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileInputStream
 
 @AndroidEntryPoint
 class ArticleFragment : Fragment() {
@@ -47,6 +42,8 @@ class ArticleFragment : Fragment() {
             articleAuthor.text = author
             articleDescription.text = description
             Glide.with(requireContext()).load(imageUrl).into(imageArticle)
+
+
 
             articleBackBtn.setOnClickListener { findNavController().popBackStack() }
 
@@ -95,13 +92,14 @@ class ArticleFragment : Fragment() {
         requireContext().startActivity(Intent.createChooser(Intent(),"Choose app:"))
     }
 
+    @SuppressLint("QueryPermissionsNeeded")
     private fun web() {
         val webUrl = arguments?.getString("url")
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(webUrl))
         if (intent.resolveActivity(requireContext().packageManager) != null) {
             startActivity(intent)
         } else {
-            Toast.makeText(requireContext(), "no web browser app is available", Toast.LENGTH_SHORT).show()
+            Snackbar.make(requireView(), "no web browser app is available", Snackbar.LENGTH_SHORT).show()
         }
     }
 }

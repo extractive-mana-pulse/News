@@ -1,7 +1,7 @@
 package com.example.newsapp.data.remote
 
 import com.example.newsapp.domain.models.NewsResponse
-import com.example.newsapp.presentation.util.Constants.Companion.API_KEY
+import com.example.newsapp.data.util.Constants.Companion.API_KEY
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
