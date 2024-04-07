@@ -43,6 +43,7 @@ class HomeFragment : Fragment() {
                 when(response) {
                     is Resource.Success -> {
                         hideProgressBar()
+                        hideErrorMessage()
                         response.data?.let { newsResponse ->
                             newsAdapter.differ.submitList(newsResponse.articles.toList())
                             val totalPages = newsResponse.totalResults / Constants.QUERY_PAGE_SIZE + 2
@@ -59,7 +60,7 @@ class HomeFragment : Fragment() {
                     is Resource.Error -> {
                         hideProgressBar()
                         response.message?.let {
-                            Toast.makeText(requireContext(), "error: $it", Toast.LENGTH_SHORT).show()
+                            showErrorMessage(message = it)
                         }
                     }
                 }
@@ -77,6 +78,18 @@ class HomeFragment : Fragment() {
         isLoading = true
     }
 
+    private fun hideErrorMessage() {
+        binding.itemErrorMessage.errorMessageLayoutId.visibility = View.INVISIBLE
+        isError = false
+    }
+
+    private fun showErrorMessage(message: String) {
+        binding.itemErrorMessage.errorMessageLayoutId.visibility = View.VISIBLE
+        binding.itemErrorMessage.tvErrorMessage.text = message
+        isError = true
+    }
+
+    var isError = false
     var isLoading = false
     var isLastPage = false
     var isScrolling = false
