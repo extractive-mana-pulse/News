@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:gravity="center"
-    tools:context=".presentation.fragments.FullScreenImageFragment">
+    tools:context=".presentation.FullScreenImageFragment">
 
     <ImageView
         android:id="@+id/image_full_screen"

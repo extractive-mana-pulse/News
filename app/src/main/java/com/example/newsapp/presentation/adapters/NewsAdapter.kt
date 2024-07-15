@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.newsapp.R
 import com.example.newsapp.databinding.RcViewUiBinding
-import com.example.newsapp.domain.models.Articles
+import com.example.newsapp.domain.model.Articles
 
 class NewsAdapter: RecyclerView.Adapter<NewsAdapter.MyViewHolder>(){
 
@@ -71,6 +71,7 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.MyViewHolder>(){
                 holder.itemView.setOnClickListener {
 
                     val bundle = Bundle().apply {
+                        putString("id", id.toString())
                         putString("title", title)
                         putString("author", author)
                         putString("url", url)

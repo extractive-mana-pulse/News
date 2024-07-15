@@ -1,8 +1,8 @@
 package com.example.newsapp.domain.repositoryImpl
 
-import com.example.newsapp.data.remote.Api
-import com.example.newsapp.data.repository.Repository
-import com.example.newsapp.domain.models.NewsResponse
+import com.example.newsapp.data.remote.api.Api
+import com.example.newsapp.data.remote.repository.Repository
+import com.example.newsapp.domain.model.NewsResponse
 import retrofit2.Response
 
 class NetworkRepositoryImpl(
