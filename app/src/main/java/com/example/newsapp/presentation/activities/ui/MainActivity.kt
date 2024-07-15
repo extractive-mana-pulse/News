@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         Snackbar.make(requireViewById(R.id.bottom_nav_view), "$status", Snackbar.LENGTH_SHORT).show()
 
         Log.d("wtf", status.toString())
+        Log.d("wtf again", status.toString())
 
 //        val status by connectivityObserver.observe().collectAsState(
 //            initial = ConnectivityObserver.Status.Unavailable
