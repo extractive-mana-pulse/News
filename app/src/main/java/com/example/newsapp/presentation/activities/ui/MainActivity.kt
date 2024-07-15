@@ -2,6 +2,7 @@ package com.example.newsapp.presentation.activities.ui
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -41,6 +42,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         Snackbar.make(requireViewById(R.id.bottom_nav_view), "$status", Snackbar.LENGTH_SHORT).show()
+
+        Log.d("wtf", status.toString())
 
 //        val status by connectivityObserver.observe().collectAsState(
 //            initial = ConnectivityObserver.Status.Unavailable
