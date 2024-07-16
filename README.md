@@ -33,6 +33,8 @@ To run the News Android App, follow these steps:
 
 We welcome contributions from the community to improve and expand the functionality of the News Android App. If you have any ideas, bug fixes, or feature enhancements, please feel free to submit a pull request.
 
+## App [link](https://github.com//releases/latest/download/app-debug.apk)
+
 ## App Screenshots
 
 <img src="https://github.com/user-attachments/assets/b735d453-993e-464b-80aa-3fe7b4730221" alt="Splash Screen" width="250"/>
