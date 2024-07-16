@@ -2,7 +2,6 @@ package com.example.newsapp.presentation.activities.ui
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -10,9 +9,9 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.newsapp.R
+import com.example.newsapp.databinding.ActivityMainBinding
 import com.example.newsapp.presentation.activities.util.ConnectivityObserver
 import com.example.newsapp.presentation.activities.util.NetworkConnectivityObserver
-import com.example.newsapp.databinding.ActivityMainBinding
 import com.example.newsapp.presentation.home.vm.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,25 +34,15 @@ class MainActivity : AppCompatActivity() {
                 viewModel.isLoading.value
             }
         }
+
         setContentView(binding.root)
 
         val status = connectivityObserver.observe().apply {
             ConnectivityObserver.Status.Unavailable
         }
 
-        Snackbar.make(requireViewById(R.id.bottom_nav_view), "$status", Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(binding.bottomNavView, status.toString(), Snackbar.LENGTH_SHORT).show()
 
-        Log.d("wtf", status.toString())
-        Log.d("wtf again", status.toString())
-
-//        val status by connectivityObserver.observe().collectAsState(
-//            initial = ConnectivityObserver.Status.Unavailable
-//        )
-
-        binding.apply {
-
-            bottomNavView.setupWithNavController(navController)
-
-        }
+        binding.bottomNavView.setupWithNavController(navController)
     }
 }
