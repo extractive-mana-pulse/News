@@ -33,7 +33,7 @@ To run the News Android App, follow these steps:
 
 We welcome contributions from the community to improve and expand the functionality of the News Android App. If you have any ideas, bug fixes, or feature enhancements, please feel free to submit a pull request.
 
-## App [link](https://github.com//releases/latest/download/app-debug.apk)
+## App [link](https://github.com/extractive-mana-pulse/News/releases/tag/v1.0/download/app-debug.apk)
 
 ## App Screenshots
 
